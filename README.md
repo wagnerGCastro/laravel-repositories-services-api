@@ -3,51 +3,49 @@
   # Hosts Docker Workspace
   - 8040 # backend     # http://localhost:8040
   - 8041 # frontend    # http://localhost:8041
-  - 8042 # ecommerce
-  - 8043 # mobile
 
   # Hosts Apache
   - 8045 # backend     # http://backend.local:8045
   - 8045 # frontend    # http://frontend.local:8045
-  - 8045 # ecommerce
-  - 8045 # mobile
 
   # Hosts NGINX
   - 8050 # backend     # http://backend.local:8050
   - 8050 # frontend    # http://frontend.local:8050
-  - 8050 # ecommerce
-  - 8050 # mobile
 
 # Comands Utilities
-  # git
-    $ git commit --amend -m "Initialization Project" --no-verify
-    $ git commit -m "feat(backend): #01 - Add Laravel Framework" --no-verify
+  # 1 - Download repository
 
-  # docker
-    $ docker-compose build workspace
-    $ docker-compose -f docker-compose.stage.yml --env-file .env.stage build workspace
+    $ git clone https://github.com/wagnerGCastro/laravel-nuxtjs-typescript-jest-cypress-storybook
 
-    $ docker-compose up -d workspace apache2 mysql
-    $ docker-compose -f docker-compose.stage.yml --env-file .env.stage up -d workspace
+  # 2 - Init project
+    $ cd laravel-nuxtjs-typescript-jest-cypress-storybook
+    $ yarn
 
-    $ docker-compose exec workspace bash   // root
-    $ docker-compose -f docker-compose.stage.yml --env-file .env.stage exec workspace bash   // root
-    $ docker-compose exec --user=laradock workspace bash  // user
+    $ docker-compose -f docker-compose.dev.yml --env-file .env.dev build mysql
+    $ docker-compose -f docker-compose.dev.yml --env-file .env.dev build apache2
+    $ docker-compose -f docker-compose.dev.yml --env-file .env.dev build workspace
 
-    $ docker exec -it 5cd1145d0a37 bash
-    $ docker exec -it 003-workspace bash
+    $ docker-compose -f docker-compose.dev.yml --env-file .env.dev up -d mysql
+    $ docker-compose -f docker-compose.dev.yml --env-file .env.dev up -d apache2
+    $ docker-compose -f docker-compose.dev.yml --env-file .env.dev up -d workspace 
 
 
-    - container
-      $ docker-compose stop workspace
-      $ docker-compose start workspace
-
-  # backend
+  # 3 - Entry in workspace to backend
     - Run server
-      php artisan serve --host=0.0.0.0  --port=8040
-      php artisan serve --host=backend.local  --port=8045
-      php artisan serve --env=dev  --host=0.0.0.0  --port=8040
-      php -S 0.0.0.0:8040 
+      $ docker-compose -f docker-compose.dev.yml --env-file .env.dev exec workspace bash 
+      $ cd packages/backend
+      $ yarn install
+      $ composer install
+      $ php artisan migrate --env=dev 
+      $ php artisan db:seed --env=dev 
+      $ php artisan serve --env=dev  --host=0.0.0.0  --port=8040
+
+  # 5 - Entry in workspace to frontend
+   - Run server
+      $ docker-compose -f docker-compose.dev.yml --env-file .env.dev exec workspace bash 
+      $ cd packages/frontend
+      $ yarn install
+      $ composer install
 
   # PHP Artisan
     - php artisan migrate
@@ -62,6 +60,6 @@
     -	php artisan db:seed --class=DatabaseSeeder  
     - php artisan make:policy PostPolicy --model=Post
 
-  # Mysql
-    - ALTER TABLE myTabel AUTO_INCREMENT=0;
-
+# Entry in workspace or mysql
+  $ docker-compose -f docker-compose.dev.yml --env-file .env.dev exec workspace bash 
+  $ docker-compose -f docker-compose.dev.yml --env-file=.env.dev exec -it mysql mysql -uroot -p

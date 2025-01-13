@@ -5,7 +5,6 @@
 /vendor
 .env
 .env.backup
-.env.dev
 .env.stage
 .phpunit.result.cache
 docker-compose.override.yml

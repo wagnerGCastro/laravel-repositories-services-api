@@ -26,20 +26,20 @@ class AuthServiceProvider extends ServiceProvider
      */
     public function boot(GateContract $gate)
     {
-        $this->registerPolicies($gate);
+        // $this->registerPolicies($gate);
 
-        $permissions = Permission::with('roles')->get();
+        // $permissions = Permission::with('roles')->get();
 
-        foreach( $permissions as $permission ):
-            $gate->define($permission->name, function(User $user) use ($permission){
-                return $user->hasPermission($permission);
-            });
-        endforeach;
+        // foreach( $permissions as $permission ):
+        //     $gate->define($permission->name, function(User $user) use ($permission){
+        //         return $user->hasPermission($permission);
+        //     });
+        // endforeach;
 
-        $gate->before(function(User $user, $ability) {
-            if($user->hasAnyRoles('admin')) {
-                return true;
-            }
-        });
+        // $gate->before(function(User $user, $ability) {
+        //     if($user->hasAnyRoles('admin')) {
+        //         return true;
+        //     }
+        // });
     }
 }
