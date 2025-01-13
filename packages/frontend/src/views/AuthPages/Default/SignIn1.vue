@@ -33,7 +33,11 @@
     </tab-nav>
     <tab-content id="pills-tabContent-1" class="mt-0">
       <tab-content-item :active="true" id="pills-jwt-fill" aria-labelled-by="pills-jwt-tab-fill">
-        <sign-in1-form formType="jwt" email="wagner@wagner.org" password="password"></sign-in1-form>
+        <sign-in1-form
+          formType="jwt"
+          email="wagner.castro@teste.com"
+          password="password"
+        ></sign-in1-form>
       </tab-content-item>
       <tab-content-item
         :active="false"
@@ -75,7 +79,7 @@ export default {
   name: 'SignIn1',
   components: { SignIn1Form },
   data: () => ({}),
-  mounted  () {
+  mounted() {
     const loggedIn = localStorage.getItem('access_token')
     if (loggedIn !== undefined && loggedIn !== null) {
       this.$router.push({ name: 'mini.dashboard.home-2' })

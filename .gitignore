@@ -32,9 +32,8 @@ yarn-error.log*
 
 # local env files
 
-/.env
+
 /.env.prod
-/.env.dev
 /.env.stage
 /.env.local
 /.env.development.local
@@ -77,6 +76,5 @@ sw.js
 
 /docker-compose.stage.yml
 /.env.stage
-/.env.dev
 /.env.prod
 /doc.txt
