@@ -40,7 +40,7 @@
       $ php artisan db:seed --env=dev 
       $ php artisan serve --env=dev  --host=0.0.0.0  --port=8040
 
-  # 5 - Entry in workspace to frontend
+  # 4 - Entry in workspace to frontend
    - Run server
       $ docker-compose -f docker-compose.dev.yml --env-file .env.dev exec workspace bash 
       $ cd packages/frontend
