@@ -5,8 +5,8 @@
   - 8041 # frontend    # http://localhost:8041
 
   # Hosts Apache
-  - 8045 # backend     # http://backend.local:8045
-  - 8045 # frontend    # http://frontend.local:8045
+  - 8040 # backend     # http://backend.local:8040
+  - 8041 # frontend    # http://frontend.local:8041
 
   # Hosts NGINX
   - 8050 # backend     # http://backend.local:8050
